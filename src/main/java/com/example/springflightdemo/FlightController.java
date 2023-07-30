@@ -7,20 +7,22 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/flights")
 public class FlightController {
 
-    @Autowired
-    ArrayList<Flight> flights;
+//    @Autowired
+//    ArrayList<Flight> flights;
 
     @Autowired
     FlightRepository flightRepository;
 
-//    @GetMapping("/flights")
-//    public List<Flight> getFlight(){
-//        return flights;
-//    }
+    @GetMapping
+    public List<Flight> getFlight(){
+        return flightRepository.findAll();
+    }
 //
 //    @PostMapping("/flights")
 //    public Flight addFlight(@RequestBody Flight newFlight){
@@ -28,27 +30,29 @@ public class FlightController {
 //        return newFlight;
 //    }
 
+    @GetMapping("/{id}")
+    public Optional<Flight> getFlights(@PathVariable Long id) {
+        return flightRepository.findById(id);
+    }
     @PostMapping
     public Flight addFlight(@RequestBody Flight newFlight) {
         Flight flight = flightRepository.save(newFlight);
         return flight;
     }
-    @GetMapping
-    public List<Flight> getFlights() {
-        return flightRepository.findAll();
-    }
 
-    @DeleteMapping("/flights/{name}")
+
+    @DeleteMapping("/{name}")
     public void addFlight(@PathVariable String name){
-        Flight flight = flights.stream().filter(f -> f.getName().equals(name)).findAny().get();
-        flights.remove(flight);
+//        Flight flight = flights.stream().filter(f -> f.getName().equals(name)).findAny().get();
+//        flights.remove(flight);
+        return;
     }
 
     @PutMapping("/flights/{name}")
-    public Flight putFlight(@PathVariable String name, @RequestBody Flight newFlight){
-        Flight flight = flights.stream().filter(f -> f.getName().equals(name)).findAny().get();
-        flights.set(flights.indexOf(flight),newFlight);
-        return newFlight;
+    public void putFlight(@PathVariable String name, @RequestBody Flight newFlight){
+//        Flight flight = flights.stream().filter(f -> f.getName().equals(name)).findAny().get();
+//        flights.set(flights.indexOf(flight),newFlight);
+//        return newFlight;
     }
 
 }
