@@ -1,14 +1,13 @@
-package com.demo.springbootservice;
+package com.demo.Springbootservice;
 
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RestController;
 
-@Component
+@RestController
 public class HelloRestApi {
-    public HelloRestApi() {
-        System.out.println("I'm inside Hello Rest API class");
+    public HelloRestApi(){
+        System.out.println("HelloRestApi class");
     }
-
-    public String getHelloWorld() {
+    public String getHelloWorld(){
         return "Hello World";
     }
 }

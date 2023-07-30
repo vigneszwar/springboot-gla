@@ -1,55 +1,54 @@
-package com.demo.springbootservice;
+package com.demo.Springbootservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
 @RestController
 public class WelcomeController {
-    ArrayList<Integer> numbers;
+    ArrayList<Integer> ls;
 
-    @Value("${name}")
+    @Value("<h1>${name}</h1>")
     String name;
 
     @Autowired
-    public WelcomeController(ArrayList<Integer> numbers) {
-        this.numbers = numbers;
+    public WelcomeController(ArrayList<Integer> ls){
+        this.ls=ls;
     }
 
     @GetMapping
-    public String getWelcomeMessage() {
-        return numbers.toString();
+    public String print(){
+        return "Hello";
     }
-
     @GetMapping("/name")
-    public String getName() {
+    public String name(){
+//        return ls.toString();
         return name;
+    }
+    @GetMapping("/number")
+    public String getWelcomeMessage(){
+        return ls.toString();
     }
 
     @PostMapping
     public String postMapping(){
-        return "this is post mapping";
+        return "post mapping";
     }
 
     @PutMapping
-    public String putApi() {
-        return "this is put method api";
+    public String putMapping(){
+        return "put mapping";
     }
 
     @PatchMapping
-    public String patchApi() {
-        return "this is patch method api";
+    public String patchMapping(){
+        return "patch mapping";
     }
 
     @DeleteMapping
-    public String deleteApi() {
-        return "this is delete method api";
+    public String deleteMapping(){
+        return "delete mapping";
     }
 }
