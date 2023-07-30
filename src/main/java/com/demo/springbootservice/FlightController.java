@@ -42,13 +42,13 @@ public class FlightController {
         return flight;
     }
 
-    @PutMapping("/{name}")
-    public Flight replaceFlight(@PathVariable String name, @RequestBody Flight newFlight) {
-        return null;
+    @PutMapping("/{id}")
+    public Flight replaceFlight(@PathVariable long id, @RequestBody Flight newFlight) {
+        return flightRepository.save(newFlight);
     }
-    @DeleteMapping("/{name}")
-    public void addFlight(@PathVariable String name) {
-
+    @DeleteMapping("/{id}")
+    public void addFlight(@PathVariable long id) {
+        flightRepository.deleteById(id);
     }
 
 
