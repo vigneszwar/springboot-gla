@@ -23,14 +23,9 @@ public class FlightController {
 
     }
     @PutMapping("/flights/{name}")
-    public List<Flight> updateFlight(@PathVariable String name,@RequestBody Flight flightDetails) {
-        Flight updateFlight = flights.stream().filter(f -> f.getName().equals(name)).findAny().get();
-        updateFlight.setSrc(flightDetails.getSrc());
-        updateFlight.setDest(flightDetails.getDest());
-        updateFlight.setDeparture(flightDetails.getDeparture());
-        updateFlight.setArrival(flightDetails.getArrival());
-        flights.add(updateFlight);
-        return flights;
+    public void putFlight(@PathVariable String name,@RequestBody Flight newFlight) {
+        Flight flight = flights.stream().filter(f -> f.getName().equals(name)).findAny().get();
+        flights.set(flights.indexOf(flight),newFlight);
     }
 
     @DeleteMapping("/flights/{name}")
@@ -41,3 +36,8 @@ public class FlightController {
 
 
 }
+
+
+
+
+//
