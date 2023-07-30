@@ -1,4 +1,4 @@
-package com.demo.Springbootservice;
+package com.demo.springbootservice;
 
 import org.springframework.web.bind.annotation.RestController;
 
@@ -6,8 +6,5 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloRestApi {
     public HelloRestApi(){
         System.out.println("HelloRestApi class");
-    }
-    public String getHelloWorld(){
-        return "Hello World";
     }
 }
