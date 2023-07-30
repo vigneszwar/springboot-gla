@@ -20,7 +20,14 @@ public class FlightController {
     FlightRepository flightRepository;
 
     @GetMapping
-    public List<Flight> getFlight(){
+    public List<Flight> getFlights(@RequestParam(required = false) String name, @RequestParam(required = false) String src) {
+        if(name != null && !name.isEmpty()) {
+            Flight flight = flightRepository.findByName(name);
+            return List.of(flight);
+        }
+        if(src != null && !src.isEmpty()) {
+            return flightRepository.findAllBySrc(src);
+        }
         return flightRepository.findAll();
     }
 //
@@ -34,6 +41,7 @@ public class FlightController {
     public Optional<Flight> getFlights(@PathVariable Long id) {
         return flightRepository.findById(id);
     }
+
     @PostMapping
     public Flight addFlight(@RequestBody Flight newFlight) {
         Flight flight = flightRepository.save(newFlight);
@@ -49,10 +57,11 @@ public class FlightController {
     }
 
     @PutMapping("/flights/{name}")
-    public void putFlight(@PathVariable String name, @RequestBody Flight newFlight){
+    public Flight putFlight(@PathVariable String name, @RequestBody Flight newFlight){
 //        Flight flight = flights.stream().filter(f -> f.getName().equals(name)).findAny().get();
 //        flights.set(flights.indexOf(flight),newFlight);
 //        return newFlight;
+        return flightRepository.save(newFlight);
     }
 
 }
