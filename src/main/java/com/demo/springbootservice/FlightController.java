@@ -1,5 +1,6 @@
 package com.demo.springbootservice;
-
+import java.util.ArrayList;
+import java.util.List;
 import com.demo.springbootservice.model.Flight;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,7 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//PUT localhost:8080/flights/{flight_name})
+//{
+//                      "departure_city":"Reston",
+//                      "arrival_city":"Morgantown"
+//                }
 @RestController
 public class FlightController {
     @Autowired
@@ -32,7 +37,12 @@ public class FlightController {
     public void addFlight(@PathVariable String name) {
         Flight flight = flights.stream().filter(f -> f.getName().equals(name)).findAny().get();
         flights.remove(flight);
+
+        @PutMapping("/flights/{name}")
+        public void putFlight(@PathVariable String name,@RequestBody Flight newFlight) {
+            Flight flight = flights.stream().filter(f -> f.getName().equals(name)).findAny().get();
+            flights.set(flights.indexOf(flight),newFlight);
+        }
+
+
     }
-
-
-}

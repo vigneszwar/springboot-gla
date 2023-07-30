@@ -8,16 +8,24 @@ import java.util.ArrayList;
 
 @Configuration
 public class DemoConfiguration {
+
     @Bean
-    public ArrayList<Flight> getFlights() {
-        ArrayList<Flight> flights = new ArrayList<>();
-        flights.add(Flight.builder()
-                .departure("12:00 pm")
-                .arrival("6:00 pm")
-                .src("Delhi Airport")
-                .dest("Bangalore Airport")
-                .name("Indigo")
-                .build());
-        return flights;
+    public ArrayList<Integer> getNumbers() {
+        System.out.println("Inside Bean method which creates and returns arraylist to spring boot");
+        ArrayList<Integer> numbers = new ArrayList<>();
+        numbers.add(1);
+        numbers.add(2);
+        numbers.add(3);
+        return numbers;
+        public ArrayList<Flight> getFlights() {
+            ArrayList<Flight> flights = new ArrayList<>();
+            flights.add(Flight.builder()
+                    .departure("12:00 pm")
+                    .arrival("6:00 pm")
+                    .src("Delhi Airport")
+                    .dest("Bangalore Airport")
+                    .name("Indigo")
+                    .build());
+            return flights;
+        }
     }
-}
