@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,8 +23,17 @@ public class FlightController {
     @Autowired
     FlightRepository flightRepository;
     @GetMapping
-    public List<Flight> getFlights() {
+    public List<Flight> getFlights(@RequestParam(required = false) String name) {
+        if(name != null && !name.isEmpty()) {
+            Flight flight = flightRepository.findByName(name);
+            return List.of(flight);
+        }
         return flightRepository.findAll();
+    }
+
+    @GetMapping("{id}")
+    public Flight getFlight(@PathVariable Long id) {
+        return flightRepository.findById(id).get();
     }
 
     @PostMapping
