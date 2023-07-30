@@ -31,11 +31,9 @@ public class FlightController {
     }
    // PUT localhost:8080/flights/{flight_name}
     @PutMapping("/flights/{flight_name}")
-    public void updateFlight(@RequestBody Flight flight) {
-        //Flight flight = flights.stream().filter(f -> f.getName().equals(flight_name)).findAny().get();
-        flights.add(flight);
-
-
+    public void putFlight(@RequestBody Flight newFlight,@PathVariable String flightName) {
+        Flight flight = flights.stream().filter(f -> f.getName().equals(flightName)).findAny().get();
+        flights.set(flights.indexOf(flight),newFlight);
     }
 
 }
