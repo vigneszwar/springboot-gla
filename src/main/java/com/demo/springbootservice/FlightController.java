@@ -23,10 +23,13 @@ public class FlightController {
     @Autowired
     FlightRepository flightRepository;
     @GetMapping
-    public List<Flight> getFlights(@RequestParam(required = false) String name) {
+    public List<Flight> getFlights(@RequestParam(required = false) String name, @RequestParam(required = false) String src) {
         if(name != null && !name.isEmpty()) {
             Flight flight = flightRepository.findByName(name);
             return List.of(flight);
+        }
+        if(src != null && !src.isEmpty()) {
+            return flightRepository.findAllBySrc(src);
         }
         return flightRepository.findAll();
     }
