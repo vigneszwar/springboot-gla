@@ -14,14 +14,20 @@ public class FlightController {
 
     @Autowired
     FlightRepository flightRepository;
+
+
     @GetMapping
-    public List<Flight> getFlights() {
+    public List<Flight> getFlights(@RequestParam(required = false) String name) {
+        if(name!=null&&!name.isEmpty()){
+            Flight flight=flightRepository.findByName(name);
+            return List.of(flight);
+        }
         return flightRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Flight> getFlight(@PathVariable Long id){
-        return flightRepository.findById(id);
+    public Flight getFlight(@PathVariable Long id){
+        return flightRepository.findById(id).get();
     }
 
     @PostMapping("")
