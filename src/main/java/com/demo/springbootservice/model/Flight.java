@@ -17,4 +17,5 @@ public class Flight {
     private String dest;
     private String departure;
     private String arrival;
+
 }
