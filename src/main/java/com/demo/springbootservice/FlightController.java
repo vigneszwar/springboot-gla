@@ -17,10 +17,13 @@ public class FlightController {
 
 
     @GetMapping
-    public List<Flight> getFlights(@RequestParam(required = false) String name) {
+    public List<Flight> getFlights(@RequestParam(required = false) String name,@RequestParam(required = false) String src) {
         if(name!=null&&!name.isEmpty()){
             Flight flight=flightRepository.findByName(name);
             return List.of(flight);
+        }
+        if(src!=null&&!src.isEmpty()){
+            return flightRepository.findAllBySrc(src);
         }
         return flightRepository.findAll();
     }
@@ -37,14 +40,14 @@ public class FlightController {
 
     }
 
-    @DeleteMapping("/{name}")
-    public void addFlight(@PathVariable String name) {
-        return;
+    @DeleteMapping("/{id}")
+    public void addFlight(@PathVariable Long id) {
+        flightRepository.deleteById(id);
     }
 
-    @PutMapping("/{name}")
-    public void putFlight(@PathVariable String name,@RequestBody Flight newFlight) {
-
+    @PutMapping("/{id}")
+    public Flight putFlight(@PathVariable Long id,@RequestBody Flight newFlight) {
+        return flightRepository.save(newFlight);
     }
 
 
