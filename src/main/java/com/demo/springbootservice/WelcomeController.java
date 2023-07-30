@@ -14,7 +14,6 @@ import java.util.ArrayList;
 @RestController
 public class WelcomeController {
     ArrayList<Integer> numbers;
-
     @Value("${name}")
     String name;
 
