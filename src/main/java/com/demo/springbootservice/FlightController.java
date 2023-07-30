@@ -16,7 +16,6 @@ public class FlightController {
     public List<Flight> getFlights() {
         return flights;
     }
-
     @PostMapping("/flights")
     public Flight addFlight(@RequestBody Flight newFlight) {
         flights.add(newFlight);
@@ -30,10 +29,18 @@ public class FlightController {
         flights.remove(flight);
     }
    // PUT localhost:8080/flights/{flight_name}
-    @PutMapping("/flights/{flight_name}")
-    public void putFlight(@RequestBody Flight newFlight,@PathVariable String flightName) {
-        Flight flight = flights.stream().filter(f -> f.getName().equals(flightName)).findAny().get();
+
+//    @PutMapping("/flights/{flight_name}")
+//    public void updateFlight(@RequestBody Flight flight) {
+//        //Flight flight = flights.stream().filter(f -> f.getName().equals(flight_name)).findAny().get();
+//        flights.add(flight);
+//
+//    }
+    @PutMapping("/flights/{name}")
+    public void putFlight(@RequestBody Flight newFlight,@PathVariable String name) {
+        Flight flight = flights.stream().filter(f -> f.getName().equals(name)).findAny().get();
         flights.set(flights.indexOf(flight),newFlight);
     }
+
 
 }
