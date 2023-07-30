@@ -1,38 +1,48 @@
 package com.demo.springbootservice;
 
 import com.demo.springbootservice.Model.Flight;
+import com.demo.springbootservice.Repository.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/flights")
 public class FlightController {
+
     @Autowired
-    ArrayList<Flight> flights;
-    @GetMapping("/flights")
-    public List<Flight> getFlights() {
-        return flights;
+    FlightRepository flightRepository;
+
+    @GetMapping
+    public List<Flight> getFlights(@RequestParam(required = false) String name) {
+        if(name != null && !name.isEmpty()) {
+            Flight flight = flightRepository.findByName(name);
+            return List.of(flight);
+        }
+        return flightRepository.findAll();
     }
 
-    @PostMapping("/flights")
+    @PostMapping
     public Flight addFlight(@RequestBody Flight newFlight) {
-        flights.add(newFlight);
-        return newFlight;
+        Flight flight = flightRepository.save(newFlight);
+        return flight;
     }
 
-    @DeleteMapping("/flights/{name}")
-    public String deleteFlight(@PathVariable String name){
-        Flight flight=flights.stream().filter(f->f.getName().equals(name)).findAny().get();
-        flights.remove(flight);
-        return flight.getName()+"deleted";
+    @GetMapping("/{id}")
+    public Optional<Flight> getById(@PathVariable long id){
+        Optional<Flight> flight=flightRepository.findById(id);
+        return flight;
     }
 
-    @PutMapping("/flights/{name}")
-    public ArrayList<Flight> putFlight(@PathVariable String name, @RequestBody Flight newflight){
-        Flight flight=flights.stream().filter(f->f.getName().equals(name)).findAny().get();
-        flights.set(flights.indexOf(flight),newflight);
-        return flights;
+    @DeleteMapping("/{id}")
+    public void deleteFlight(@PathVariable long id){
+        flightRepository.deleteById(id);
+    }
+
+    @PutMapping("/{id}")
+    public Flight putFlight(@PathVariable long id, @RequestBody Flight newflight){
+        return flightRepository.save(newflight);
     }
 }
