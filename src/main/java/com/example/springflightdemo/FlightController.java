@@ -1,6 +1,7 @@
 package com.example.springflightdemo;
 
 import com.example.springflightdemo.model.Flight;
+import com.example.springflightdemo.repository.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,15 +14,28 @@ public class FlightController {
     @Autowired
     ArrayList<Flight> flights;
 
-    @GetMapping("/flights")
-    public List<Flight> getFlight(){
-        return flights;
-    }
+    @Autowired
+    FlightRepository flightRepository;
 
-    @PostMapping("/flights")
-    public Flight addFlight(@RequestBody Flight newFlight){
-        flights.add(newFlight);
-        return newFlight;
+//    @GetMapping("/flights")
+//    public List<Flight> getFlight(){
+//        return flights;
+//    }
+//
+//    @PostMapping("/flights")
+//    public Flight addFlight(@RequestBody Flight newFlight){
+//        flights.add(newFlight);
+//        return newFlight;
+//    }
+
+    @PostMapping
+    public Flight addFlight(@RequestBody Flight newFlight) {
+        Flight flight = flightRepository.save(newFlight);
+        return flight;
+    }
+    @GetMapping
+    public List<Flight> getFlights() {
+        return flightRepository.findAll();
     }
 
     @DeleteMapping("/flights/{name}")
@@ -30,10 +44,11 @@ public class FlightController {
         flights.remove(flight);
     }
 
-    @PutMapping("/flights/{flight_name}")
-    public void putFlight(@PathVariable String name, @RequestBody Flight newFlight){
+    @PutMapping("/flights/{name}")
+    public Flight putFlight(@PathVariable String name, @RequestBody Flight newFlight){
         Flight flight = flights.stream().filter(f -> f.getName().equals(name)).findAny().get();
         flights.set(flights.indexOf(flight),newFlight);
+        return newFlight;
     }
 
 }
