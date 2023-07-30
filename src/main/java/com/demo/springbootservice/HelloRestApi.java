@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class HelloRestApi {
     public HelloRestApi() {
-        System.out.println("I'm inside Hello Rest API class");
+        System.out.println("I'm inside Hello Rest API class"); // constructor call
     }
 
     public String getHelloWorld() {
