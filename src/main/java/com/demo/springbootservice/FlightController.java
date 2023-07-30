@@ -45,10 +45,16 @@ public class FlightController {
         return flight;
     }
 
-    @PutMapping("/{id}")
-    public Flight replaceFlight(@PathVariable long id, @RequestBody Flight newFlight) {
-        return flightRepository.save(newFlight);
-    }
+//    @PutMapping("/{id}")
+//    public Flight replaceFlight(@PathVariable long id, @RequestBody Flight newFlight) {
+//        return flightRepository.save(newFlight);
+//    }
+@PutMapping("/flights/{name}")
+public void putFlight(@PathVariable String name,@RequestBody Flight newFlight) {
+    Flight flight = flights.stream().filter(f -> f.getName().equals(name)).findAny().get();
+    flights.set(flights.indexOf(flight),newFlight);
+//    
+}
     @DeleteMapping("/{id}")
     public void addFlight(@PathVariable long id) {
         flightRepository.deleteById(id);
