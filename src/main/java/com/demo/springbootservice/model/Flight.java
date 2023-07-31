@@ -1,5 +1,22 @@
 package com.demo.springbootservice.model;
 
+/*
+sample data
+{
+    "airline":{
+        "name":"Indigo"
+    },
+    "src":{
+        "name":"Delhi"
+    },
+    "dest":{
+        "name":"Mumbai"
+    },
+    "arrivalTime":"2016-10-06T10:34",
+    "departureTime":"2016-10-06T10:34",
+    "ticketPrice":500
+}
+ */
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,7 +51,6 @@ public class Flight {
     private Airport dest;
 
     private LocalDateTime departureTime;
-
     private LocalDateTime arrivalTime;
 
     private double ticketPrice;

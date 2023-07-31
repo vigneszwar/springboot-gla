@@ -1,4 +1,4 @@
-package com.demo.springbootservice;
+package com.demo.springbootservice.repository;
 
 import com.demo.springbootservice.model.Flight;
 import com.demo.springbootservice.model.Seat;
