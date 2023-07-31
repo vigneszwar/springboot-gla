@@ -1,5 +1,6 @@
 package com.demo.springbootservice.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,13 +24,13 @@ public class Flight {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Airline airline;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Airport src;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Airport dest;
 
     private LocalDateTime departureTime;

@@ -2,6 +2,7 @@ package com.demo.springbootservice;
 
 import com.demo.springbootservice.model.Flight;
 import com.demo.springbootservice.model.Seat;
+import com.demo.springbootservice.repository.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
