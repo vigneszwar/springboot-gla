@@ -1,4 +1,4 @@
-package com.demo.springbootservice.Repository;
+package com.demo.springbootservice.repository;
 
 import com.demo.springbootservice.Model.Flight;
 import org.springframework.data.jpa.repository.JpaRepository;

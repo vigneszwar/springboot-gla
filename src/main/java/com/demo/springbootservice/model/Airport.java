@@ -1,4 +1,4 @@
-package com.demo.springbootservice.model;
+package com.demo.springbootservice.Model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,6 +15,10 @@ import lombok.NoArgsConstructor;
 public class Airport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+
     private String name;
+
+    private String city;
+
 }
